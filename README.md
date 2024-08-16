@@ -15,7 +15,7 @@
 1. **Clone the Repository**
 
    ```bash
-   git clone https://github.com/AAFREEN-SAYYED/DataBlind.git
+   git clone https://github.com/AAFREEN-SAYYED/DataBlindProject.git
    cd DataBlind
    
 2. **Set Up the Environment**   
