@@ -12,6 +12,7 @@ app = Flask(__name__)
 # Ensure the downloads directory exists
 if not os.path.exists('downloads'):
     os.makedirs('downloads')
+
 @app.route('/upload', methods=['POST'])
 def upload_files():
     files = request.files.getlist('file')
@@ -33,7 +34,11 @@ def upload_files():
     if len(files) == 1:
         # Single file upload
         file = files[0]
-        df = pd.read_csv(file)
+        filename = file.filename
+        if filename.endswith('.csv'):
+            df = pd.read_csv(file)  # Handle as CSV
+        elif filename.endswith('.txt'):
+            df = pd.read_csv(file, delimiter='\t')
         
         # Initialize the PII data dictionary
         pii_data = {
@@ -79,10 +84,17 @@ def upload_files():
         }), 200
 
     else:
+
+        
+          
         # Batch upload
         for file in files:
-            df = pd.read_csv(file)
-            
+            filename = file.filename
+            if filename.endswith('.csv'):
+                df = pd.read_csv(file)  # Handle as CSV
+            elif filename.endswith('.txt'):
+                # Assuming tab-delimited text file
+                df = pd.read_csv(file, delimiter='\t')
             # Initialize the PII data dictionary
             pii_data = {
                 "email": [],
