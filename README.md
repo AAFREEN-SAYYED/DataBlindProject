@@ -33,7 +33,7 @@
    python -m spacy download en_core_web_sm
 
 6. **Configure API Keys**
-   *Create a config.yaml file in the project root with your OpenAI API key:*
+   *Update the config.yaml file with your OpenAI API key:*
    
    ```bash
    api_key: your_openai_api_key
